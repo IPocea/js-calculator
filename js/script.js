@@ -278,6 +278,9 @@ function applyEqual(value, displayScreen) {
 			num1 = operate(operator1, num1, num2);
 			if (operator1 === "/" && num2 === 0) {
 				displayScreen.textContent = "I wish I could do that";
+				num2 = null;
+				operator1 = "";
+				operator2 = "";
 				return;
 			}
 			num2 = null;
