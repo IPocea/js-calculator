@@ -173,6 +173,12 @@ function populateScreen(value, displayScreen) {
 							value === "."
 						) {
 							return;
+						} else if (displayScreen.textContent === "0") {
+							if (value === ".") {
+								displayScreen.textContent = "0.";
+							} else {
+								displayScreen.textContent = value;
+							}
 						} else {
 							displayScreen.textContent += value;
 						}
@@ -238,22 +244,24 @@ function applyOperatorsHelpers(value, displayScreen) {
 				}
 				break;
 			case "Backspace":
-				if (displayScreen.textContent.length > 2) {
-					displayScreen.textContent = displayScreen.textContent.slice(
-						0,
-						displayScreen.textContent.length - 1
-					);
-				} else if (displayScreen.textContent.length === 2) {
-					if (displayScreen.textContent.indexOf("-") !== -1) {
-						displayScreen.textContent = "0";
-					} else {
+				if (!nextDisplay) {
+					if (displayScreen.textContent.length > 2) {
 						displayScreen.textContent = displayScreen.textContent.slice(
 							0,
 							displayScreen.textContent.length - 1
 						);
+					} else if (displayScreen.textContent.length === 2) {
+						if (displayScreen.textContent.indexOf("-") !== -1) {
+							displayScreen.textContent = "0";
+						} else {
+							displayScreen.textContent = displayScreen.textContent.slice(
+								0,
+								displayScreen.textContent.length - 1
+							);
+						}
+					} else if (displayScreen.textContent.length === 1) {
+						displayScreen.textContent = "0";
 					}
-				} else if (displayScreen.textContent.length === 1) {
-					displayScreen.textContent = "0";
 				}
 				break;
 			default:
