@@ -197,11 +197,7 @@ function applyOperatorsSymbols(value, displayScreen) {
 			num1 = +displayScreen.textContent;
 			nextDisplay = true;
 		} else if (operator1 && nextDisplay) {
-			if (operator1 === value) {
-				return;
-			} else {
-				operator1 = value;
-			}
+			operator1 = value;
 		} else if (operator1) {
 			operator2 = value;
 			num2 = +displayScreen.textContent;
@@ -300,9 +296,10 @@ function displaySolution(num1, displayScreen) {
 	} else if (
 		num1Stringify === "Infinity" ||
 		num1Stringify === "-Infinity" ||
-		/e/gi.test(num1Stringify)
+		/e/gi.test(num1Stringify) ||
+		num1Stringify.length > 18
 	) {
-		displayScreen.textContent = "The number is to big";
+		displayScreen.textContent = "The number is to long";
 	} else {
 		displayScreen.textContent = "" + num1;
 	}
